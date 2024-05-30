@@ -1,0 +1,32 @@
+{
+    "name": "wpcompatibility/wp-compatibility",
+    "description": "WPCompatibility sniff to test php code against different WP versions.",
+    "type": "phpcodesniffer-standard",
+    "authors": [
+        {
+            "name": "Naveen Muthusamy",
+            "email": "kmnaveen101@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "squizlabs/php_codesniffer": "^3.0",
+        "phpcsstandards/phpcsutils": "^1.0",
+        "phpcsstandards/phpcsextra": "^1.0",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "list-sniffs": "./vendor/bin/phpcs --standard=WPCompatibility -e",
+        "run-tests": [
+            "@php ./vendor/phpunit/phpunit/phpunit --debug --filter WPCompatibility ./vendor/squizlabs/php_codesniffer/tests/AllTests.php"
+        ]
+    }
+}
