@@ -8,6 +8,10 @@
             "email": "kmnaveen101@gmail.com"
         }
     ],
+    "license": [
+
+        "GPL-3.0-or-later"
+    ],
     "require": {
         "php": ">=5.4",
         "squizlabs/php_codesniffer": "^3.0",
