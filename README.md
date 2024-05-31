@@ -21,7 +21,7 @@ composer require wpcompatibility/wp-compatibility
 # For single wp version
 WP_COMPAT_PHPCS_SUPPORTED_VERSIONS='5.0.0' vendor/bin/phpcs --standard=WPCompatibility your-plugin-or-theme-folder/
 
-# To test against multiple wp version you separate value by comma
+# To test against multiple wp versions you can separate versions by comma
 WP_COMPAT_PHPCS_SUPPORTED_VERSIONS='5.0.1,6.0' vendor/bin/phpcs --standard=WPCompatibility your-plugin-or-theme-folder/
 ```
 
