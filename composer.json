@@ -1,6 +1,6 @@
 {
     "name": "wpcompatibility/wp-compatibility",
-    "description": "WPCompatibility sniff to test php code against different WP versions.",
+    "description": "WPCompatibility has a collection of PHPCS sniffs which will tell you if your plugin/theme code is compatible with a specific wordpress version",
     "type": "phpcodesniffer-standard",
     "authors": [
         {

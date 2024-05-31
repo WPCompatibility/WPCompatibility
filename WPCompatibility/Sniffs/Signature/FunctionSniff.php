@@ -21,11 +21,19 @@ class FunctionSniff implements Sniff {
 	private function is_wordpress_function($function_name) {
 		return array_key_exists($function_name, $this::$data);
 	}
+	public $versions = null;
+	private static function may_be_get_supported_versions() {
+		$supported_versions = getenv('WP_COMPAT_PHPCS_SUPPORTED_VERSIONS');
+
+		return is_string($supported_versions) ? $supported_versions : '3.7';
+	}
 	
-	public $supported_versions = '4.8.0';
 	
 	public function get_supported_versions() {
-		return explode(",", $this->supported_versions);
+		if (!$this->versions) {
+			$this->versions = self::may_be_get_supported_versions();
+		}
+		return explode(",", $this->versions);
 	}
 	
 	/**
