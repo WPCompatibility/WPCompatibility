@@ -43,8 +43,9 @@ throw an error
 ```injectablephp
 Function: wp_date is not available in wordpress version 5.0.0
 ```
-- Verify wordpress function signature, if you pass less number of arguments to a wordpress function then it will raise an error.
+- Verify wordpress function signature, if you pass less number of arguments to a wordpress function then it will raise an error.      
 
-
-### [Buy me a coffee ☕](https://buymeacoffee.com/naveen17797)
+<p align="center">
 ![F_TwK0vbIAAShWP](https://github.com/WPCompatibility/WPCompatibility/assets/18109258/abeffd2c-0440-4774-a80d-70075a192820)
+### [Buy me a coffee ☕](https://buymeacoffee.com/naveen17797)
+</p>
