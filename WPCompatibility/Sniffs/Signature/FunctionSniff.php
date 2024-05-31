@@ -9,11 +9,7 @@ class FunctionSniff implements Sniff {
 	
 	private static $data = null;
 	
-	private static $var_args_function = array(
-		'apply_filters' => true,
-		'add_query_arg' => true,
-		'do_action' => true
-	);
+
 	
 	public function __construct() {
 		if(!$this::$data) {
@@ -26,7 +22,7 @@ class FunctionSniff implements Sniff {
 		return array_key_exists($function_name, $this::$data);
 	}
 	
-	public $supported_versions = '5.0';
+	public $supported_versions = '4.8.0';
 	
 	public function get_supported_versions() {
 		return explode(",", $this->supported_versions);
@@ -56,7 +52,9 @@ class FunctionSniff implements Sniff {
 		$ignoreTokens    = Tokens::$emptyTokens;
 		$ignoreTokens[]  = T_BITWISE_AND;
 		$functionKeyword = $phpcsFile->findPrevious($ignoreTokens, ($stackPtr - 1), null, true);
-		if ($tokens[$functionKeyword]['code'] === T_FUNCTION || $tokens[$functionKeyword]['code'] === T_CLASS) {
+		if ($tokens[$functionKeyword]['code'] === T_FUNCTION || $tokens[$functionKeyword]['code'] === T_CLASS
+		    || $tokens[$functionKeyword]['code'] === T_OBJECT_OPERATOR
+		    || $tokens[$functionKeyword]['code'] === T_NULLSAFE_OBJECT_OPERATOR) {
 			return;
 		}
 		
@@ -96,29 +94,25 @@ class FunctionSniff implements Sniff {
 				);
 				continue;
 			}
-			// Dont perform signature verification if function accepts variable args.
-			if (array_key_exists($function_name, self::$var_args_function)) {
-				continue;
-			}
-			
+
 			$args_data = $this->get_arguments_data($available_function['arguments']);
 			$min_args = $args_data['min'];
 			$max_args = $args_data['max'];
 			$fn_call_args_count = $this->get_function_call_args_count($tokens, $phpcsFile, $stackPtr);
 
-			if ($fn_call_args_count < $min_args || $fn_call_args_count > $max_args) {
-				
+			// We don't care about passing more args to function since php don't throw any error.
+			if ($fn_call_args_count < $min_args) {
 				$phpcsFile->addError(
-				sprintf('Function: %s signature did not match, required signature for wp version %s is `%s` expected %s args but found %d args',
-					$function_name,
-					$supported_version,
-					"$function_name(" . $this->render_args($available_function['arguments']) . ")",
-					$min_args . ' to ' . $max_args,
-					$fn_call_args_count
-				),
-				$stackPtr,
-				'FunctionSignatureMismatch'
-			);
+					sprintf('Function: %s signature did not match, required signature for wp version %s is `%s` expected atleast %d args but found only %d args',
+						$function_name,
+						$supported_version,
+						"$function_name(" . $this->render_args($available_function['arguments']) . ")",
+						$min_args,
+						$fn_call_args_count
+					),
+					$stackPtr,
+					'TooFewArguments'
+				);
 			}
 		}
 		
@@ -208,7 +202,7 @@ class FunctionSniff implements Sniff {
 	 * @return string
 	 */
 	private function render_args( $arguments ) {
-		$arguments = explode(",", $arguments);
+		$arguments = array_filter(explode(",", $arguments));
 		$args = array_map(function ($item) {
 			return '$' . rtrim(rtrim($item, '::R'), '::NR');
 		}, $arguments);
