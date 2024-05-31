@@ -6,7 +6,7 @@
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [What it can do](#What it can do)
+- [What-it-can-do](#What it can do)
 - [Buy me a coffee ☕](https://buymeacoffee.com/naveen17797)
 
 ## Installation:
@@ -33,7 +33,7 @@ WP_COMPAT_PHPCS_SUPPORTED_VERSIONS='5.0.1,6.0' vendor/bin/phpcs --standard=WPCom
     </properties>
 </rule>
 ```
-### What it can do
+### What-it-can-do
 - Detect if a wordpress function is present in specific version. For example if you
 have a plugin file with the below code which is set to be compatible with 5.0, this will
 throw an error
