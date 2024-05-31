@@ -32,3 +32,6 @@ WP_COMPAT_PHPCS_SUPPORTED_VERSIONS='5.0.1,6.0' vendor/bin/phpcs --standard=WPCom
     </properties>
 </rule>
 ```
+
+### [Buy me a coffee](https://buymeacoffee.com/naveen17797)
+![image](https://github.com/WPCompatibility/WPCompatibility/assets/18109258/8e3afd65-9bdc-4013-88cd-2707ad523c2e)
