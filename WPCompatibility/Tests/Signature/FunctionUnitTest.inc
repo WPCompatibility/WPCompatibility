@@ -1,3 +1,3 @@
 <?php
 
-foo()->apply_filters();
+self::wp_privacy_anonymize_ip($data);

@@ -62,6 +62,7 @@ class FunctionSniff implements Sniff {
 		$functionKeyword = $phpcsFile->findPrevious($ignoreTokens, ($stackPtr - 1), null, true);
 		if ($tokens[$functionKeyword]['code'] === T_FUNCTION || $tokens[$functionKeyword]['code'] === T_CLASS
 		    || $tokens[$functionKeyword]['code'] === T_OBJECT_OPERATOR
+		    || $tokens[$functionKeyword]['code'] === T_DOUBLE_COLON
 		    || $tokens[$functionKeyword]['code'] === T_NULLSAFE_OBJECT_OPERATOR) {
 			return;
 		}
